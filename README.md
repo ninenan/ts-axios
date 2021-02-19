@@ -1,0 +1,1 @@
+# TypeScript library starter
