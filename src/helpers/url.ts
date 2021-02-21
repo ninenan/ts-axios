@@ -4,12 +4,12 @@ import { EOF } from 'dns'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:41:33
- * @LastEditTime: 2021-02-21 22:05:34
+ * @LastEditTime: 2021-02-21 22:44:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-axios/src/helpers/url.ts
  */
-import { isArray, isDate, isObject, encode } from './utils'
+import { isArray, isDate, isPlainObject, encode } from './utils'
 
 export function buildURl(url: string, params?: any): string {
   if (!params) {
@@ -33,7 +33,7 @@ export function buildURl(url: string, params?: any): string {
     values.forEach((val: any) => {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)
