@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:14:30
- * @LastEditTime: 2021-02-22 22:07:51
+ * @LastEditTime: 2021-02-22 22:59:48
  * @LastEditors: Please set LastEditors
  * @Description: types
  * @FilePath: /ts-axios/src/types/index.ts
@@ -27,6 +27,7 @@ export interface AxiosRequestConfig {
   params?: any
   headers?: any
   responseType?: XMLHttpRequestResponseType
+  timeout?: number
 }
 export interface AxiosResponse {
   data: any
