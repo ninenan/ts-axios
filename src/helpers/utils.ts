@@ -3,7 +3,7 @@ import { type } from 'os'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-02-21 22:40:07
+ * @LastEditTime: 2021-02-22 22:38:23
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -24,6 +24,10 @@ export function isArray(params: any): boolean {
 
 export function isPlainObject(params: any): params is Object {
   return toString.call(params).slice(8, -1) === 'Object'
+}
+
+export function isString(params: any): boolean {
+  return toString.call(params).slice(8, -1) === 'String'
 }
 
 export function encode(params: string): string {
