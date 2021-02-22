@@ -1,20 +1,20 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-19 23:23:04
- * @LastEditTime: 2021-02-21 23:27:37
+ * @LastEditTime: 2021-02-22 22:06:37
  * @LastEditors: Please set LastEditors
  * @Description: ts-axios
  * @FilePath: /ts-axios/src/index.ts
  */
-import { AxiosRequestConfig } from './types'
+import { AxiosRequestConfig, AxiosPromise } from './types'
 import xhr from './xhr'
 import { buildURl } from './helpers/url'
 import { transformRequest } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  xhr(config)
+  return xhr(config)
 }
 
 function processConfig(config: AxiosRequestConfig): void {

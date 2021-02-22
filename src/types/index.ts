@@ -1,12 +1,11 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:14:30
- * @LastEditTime: 2021-02-21 23:08:15
+ * @LastEditTime: 2021-02-22 22:07:51
  * @LastEditors: Please set LastEditors
  * @Description: types
  * @FilePath: /ts-axios/src/types/index.ts
  */
-
 export type Method =
   | 'get'
   | 'GET'
@@ -27,4 +26,15 @@ export interface AxiosRequestConfig {
   data?: any
   params?: any
   headers?: any
+  responseType?: XMLHttpRequestResponseType
 }
+export interface AxiosResponse {
+  data: any
+  status: number
+  statusText: string
+  headers: any
+  config: AxiosRequestConfig
+  request: any
+}
+
+export interface AxiosPromise extends Promise<AxiosResponse> {}
