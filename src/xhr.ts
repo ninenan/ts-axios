@@ -1,12 +1,13 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-02-22 22:05:55
+ * @LastEditTime: 2021-02-22 22:22:00
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/xhr.ts
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
+import { parseHeaders } from './helpers/headers'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -25,7 +26,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         return
       }
 
-      const responseHeaders = request.getAllResponseHeaders()
+      const responseHeaders = parseHeaders(request.getAllResponseHeaders())
       const responseData =
         responseType && responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {

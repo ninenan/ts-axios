@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 23:00:30
- * @LastEditTime: 2021-02-21 23:34:44
+ * @LastEditTime: 2021-02-22 22:21:34
  * @LastEditors: Please set LastEditors
  * @Description: headers
  * @FilePath: /ts-axios/src/helpers/headers.ts
@@ -31,4 +31,27 @@ export function processHeaders(headers: any, data: any): any {
     }
   }
   return headers
+}
+
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+
+  if (!headers) {
+    return parsed
+  }
+
+  headers.split('\r\n').forEach(line => {
+    let [key, val] = line.split(':')
+    key = key.trim().toLowerCase()
+    if (!key) {
+      return
+    }
+    if (val) {
+      val = val.trim()
+    }
+
+    parsed[key] = val
+  })
+
+  return parsed
 }
