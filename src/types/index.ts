@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:14:30
- * @LastEditTime: 2021-02-22 22:59:48
+ * @LastEditTime: 2021-02-24 21:49:18
  * @LastEditors: Please set LastEditors
  * @Description: types
  * @FilePath: /ts-axios/src/types/index.ts
@@ -39,3 +39,10 @@ export interface AxiosResponse {
 }
 
 export interface AxiosPromise extends Promise<AxiosResponse> {}
+export interface AxiosError extends Error {
+  config: AxiosRequestConfig
+  code?: string | null
+  request?: any
+  response?: AxiosResponse
+  isAxiosError: boolean
+}

@@ -1,14 +1,14 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-02-22 23:02:03
+ * @LastEditTime: 2021-02-24 22:54:07
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/xhr.ts
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
 import { parseHeaders } from './helpers/headers'
-import { time } from 'console'
+import { createError } from './helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -38,14 +38,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         config,
         request
       }
-      resolve(response)
+      handleResponse(response)
     }
 
     /**
      * @description 网络出错
      */
     request.onerror = function handleError() {
-      reject(new Error('Network Error'))
+      reject(createError('Network Error', config, null, request))
     }
 
     if (timeout) {
@@ -56,7 +56,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
      * @description 请求超时
      */
     request.ontimeout = function handleTimeout() {
-      reject(new Error(`Timeout of ${timeout} ms exceeded`))
+      reject(createError(`Timeout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
     }
 
     Object.entries(headers).forEach(([name, val]: any[]) => {
@@ -68,5 +68,21 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     })
 
     request.send(data)
+
+    function handleResponse(response: AxiosResponse): void {
+      if (response.status >= 200 && response.status < 300) {
+        resolve(response)
+      } else {
+        reject(
+          createError(
+            `Request failed with status code ${response.status}`,
+            config,
+            null,
+            request,
+            response
+          )
+        )
+      }
+    }
   })
 }
