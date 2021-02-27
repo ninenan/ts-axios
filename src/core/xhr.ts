@@ -1,14 +1,14 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-02-24 22:54:07
+ * @LastEditTime: 2021-02-27 16:45:19
  * @LastEditors: Please set LastEditors
  * @Description: xhr
- * @FilePath: /ts-axios/src/xhr.ts
+ * @FilePath: /ts-axios/src/core/xhr.ts
  */
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
-import { parseHeaders } from './helpers/headers'
-import { createError } from './helpers/error'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
+import { parseHeaders } from '../helpers/headers'
+import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.responseType = responseType
     }
 
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true) // url后面加! 表示断言url不为空
 
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) {
