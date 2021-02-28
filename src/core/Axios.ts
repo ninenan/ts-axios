@@ -1,17 +1,26 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:39:53
- * @LastEditTime: 2021-02-27 17:18:11
+ * @LastEditTime: 2021-02-28 21:58:55
  * @LastEditors: Please set LastEditors
  * @Description: Axios
  * @FilePath: /ts-axios/src/core/Axios.ts
  */
 
+import { isString } from '../helpers/utils'
 import { AxiosPromise, AxiosRequestConfig, Method } from '../types'
 import dispatchRequest from './dispatchRequest'
 
 export default class Axios {
-  request(config: AxiosRequestConfig): AxiosPromise {
+  request(url: any, config?: any): AxiosPromise {
+    if (isString(url)) {
+      if (!config) {
+        config = {}
+      }
+      config.url = url
+    } else {
+      config = url
+    }
     return dispatchRequest(config)
   }
 
