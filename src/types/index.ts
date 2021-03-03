@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:14:30
- * @LastEditTime: 2021-03-01 22:25:10
+ * @LastEditTime: 2021-03-03 22:53:03
  * @LastEditors: Please set LastEditors
  * @Description: types
  * @FilePath: /ts-axios/src/types/index.ts
@@ -49,6 +49,7 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  defaults: AxiosRequestConfig
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>

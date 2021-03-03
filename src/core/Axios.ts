@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:39:53
- * @LastEditTime: 2021-03-01 22:21:54
+ * @LastEditTime: 2021-03-03 22:52:46
  * @LastEditors: Please set LastEditors
  * @Description: Axios
  * @FilePath: /ts-axios/src/core/Axios.ts
@@ -9,7 +9,6 @@
 
 import { isString } from '../helpers/utils'
 import {
-  AxiosInterceptorManager,
   AxiosPromise,
   AxiosRequestConfig,
   AxiosResponse,
@@ -31,8 +30,9 @@ interface Interceptors {
 }
 export default class Axios {
   interceptors: Interceptors
-
-  constructor() {
+  defaults: AxiosRequestConfig
+  constructor(initConfig: AxiosRequestConfig) {
+    this.defaults = initConfig
     this.interceptors = {
       request: new InterceptorManager<AxiosRequestConfig>(),
       response: new InterceptorManager<AxiosResponse>()
