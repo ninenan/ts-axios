@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:14:30
- * @LastEditTime: 2021-03-04 22:41:45
+ * @LastEditTime: 2021-03-07 18:09:58
  * @LastEditors: Please set LastEditors
  * @Description: types
  * @FilePath: /ts-axios/src/types/index.ts
@@ -29,6 +29,9 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
+
   [propName: string]: any
 }
 export interface AxiosResponse<T = any> {
@@ -89,4 +92,8 @@ export interface ResolvedFn<T = any> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }

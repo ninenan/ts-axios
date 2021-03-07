@@ -3,7 +3,7 @@ import { type } from 'os'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-03-07 17:43:53
+ * @LastEditTime: 2021-03-07 19:44:26
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -14,7 +14,7 @@ export function isDate(params: any): params is Date {
   return toString.call(params).slice(8, -1) === 'Date'
 }
 
-export function isArray(params: any): boolean {
+export function isArray(params: any): params is Array<any> {
   return toString.call(params).slice(8, -1) === 'Array'
 }
 
