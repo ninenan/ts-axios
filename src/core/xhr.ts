@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-02-27 16:45:19
+ * @LastEditTime: 2021-03-07 17:07:53
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/core/xhr.ts
@@ -59,11 +59,19 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       reject(createError(`Timeout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
     }
 
-    Object.entries(headers).forEach(([name, val]: any[]) => {
+    // Object.entries(headers).forEach(([name, val]: any[]) => {
+    //   if (data === null && name.toLowerCase() === 'content-type') {
+    //     delete headers[name]
+    //   } else {
+    //     request.setRequestHeader(name, val)
+    //   }
+    // })
+
+    Object.keys(headers).forEach(name => {
       if (data === null && name.toLowerCase() === 'content-type') {
         delete headers[name]
       } else {
-        request.setRequestHeader(name, val)
+        request.setRequestHeader(name, headers[name])
       }
     })
 

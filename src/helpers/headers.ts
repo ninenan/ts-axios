@@ -1,14 +1,13 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 23:00:30
- * @LastEditTime: 2021-02-22 22:21:34
+ * @LastEditTime: 2021-03-07 17:44:31
  * @LastEditors: Please set LastEditors
  * @Description: headers
  * @FilePath: /ts-axios/src/helpers/headers.ts
  */
-
-import { head } from 'shelljs'
-import { isPlainObject } from './utils'
+import { Method } from '../types'
+import { deepMerge, isPlainObject } from './utils'
 
 function normalizeHeaderName(headers: any, normalizeName: string): void {
   if (!headers) {
@@ -54,4 +53,19 @@ export function parseHeaders(headers: string): any {
   })
 
   return parsed
+}
+
+export const flattenHeaders = (headers: any, method: Method): any => {
+  if (!headers) {
+    return headers
+  }
+  headers = deepMerge(headers.common || {}, headers[method] || {}, headers)
+
+  const methodsToDelete = ['delete', 'get', 'post', 'head', 'options', 'put', 'patch', 'common']
+
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

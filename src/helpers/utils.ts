@@ -3,7 +3,7 @@ import { type } from 'os'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-02-27 17:17:04
+ * @LastEditTime: 2021-03-07 17:43:53
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -46,4 +46,27 @@ export function extend<T, U>(to: T, from: U): T & U {
     ;(to as T & U)[key] = from[key] as any
   }
   return to as T & U
+}
+
+export const deepMerge = (...objs: any[]): any => {
+  const result = Object.create(null)
+
+  objs.forEach(obj => {
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        const val = obj[key]
+        if (isPlainObject(val)) {
+          if (isPlainObject(result[key])) {
+            result[key] = deepMerge(result[key], val)
+          } else {
+            result[key] = deepMerge(val)
+          }
+        } else {
+          result[key] = val
+        }
+      })
+    }
+  })
+
+  return result
 }

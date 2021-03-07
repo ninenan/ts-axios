@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:39:53
- * @LastEditTime: 2021-03-03 22:52:46
+ * @LastEditTime: 2021-03-07 17:37:21
  * @LastEditors: Please set LastEditors
  * @Description: Axios
  * @FilePath: /ts-axios/src/core/Axios.ts
@@ -18,6 +18,7 @@ import {
 } from '../types'
 import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './InterceptorManager'
+import mergeConfig from './mergeConfig'
 
 interface PromiseChain {
   resolved: ResolvedFn | ((config: AxiosRequestConfig) => AxiosPromise)
@@ -31,6 +32,7 @@ interface Interceptors {
 export default class Axios {
   interceptors: Interceptors
   defaults: AxiosRequestConfig
+
   constructor(initConfig: AxiosRequestConfig) {
     this.defaults = initConfig
     this.interceptors = {
@@ -48,6 +50,8 @@ export default class Axios {
     } else {
       config = url
     }
+
+    config = mergeConfig(this.defaults, config)
 
     const chain: PromiseChain[] = [
       {

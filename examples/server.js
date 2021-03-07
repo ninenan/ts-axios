@@ -53,7 +53,7 @@ registerExtendRouter()
 
 registerInterceptorRouter()
 
-// registerConfigRouter()
+registerConfigRouter()
 
 // registerCancelRouter()
 
@@ -167,11 +167,11 @@ function registerInterceptorRouter() {
 	})
 }
 
-// function registerConfigRouter() {
-//     router.post('/config/post', function (req, res) {
-//         res.json(req.body)
-//     })
-// }
+function registerConfigRouter() {
+	router.post('/config/post', function (req, res) {
+		res.json(req.body)
+	})
+}
 
 // function registerCancelRouter() {
 //     router.get('/cancel/get', function (req, res) {

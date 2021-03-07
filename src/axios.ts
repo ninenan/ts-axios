@@ -1,9 +1,9 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-24 22:47:09
- * @LastEditTime: 2021-03-03 22:53:28
+ * @LastEditTime: 2021-03-07 15:31:14
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: axios配置
  * @FilePath: /ts-axios/src/axios.ts
  */
 import { AxiosInstance, AxiosRequestConfig } from './types'
