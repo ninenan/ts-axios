@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-07 19:33:59
- * @LastEditTime: 2021-03-07 19:42:42
+ * @LastEditTime: 2021-03-09 00:46:17
  * @LastEditors: Please set LastEditors
  * @Description: transform
  * @FilePath: /ts-axios/src/core/transform.ts

@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:39:53
- * @LastEditTime: 2021-03-07 17:37:21
+ * @LastEditTime: 2021-03-09 00:56:20
  * @LastEditors: Please set LastEditors
  * @Description: Axios
  * @FilePath: /ts-axios/src/core/Axios.ts
@@ -20,8 +20,8 @@ import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './InterceptorManager'
 import mergeConfig from './mergeConfig'
 
-interface PromiseChain {
-  resolved: ResolvedFn | ((config: AxiosRequestConfig) => AxiosPromise)
+interface PromiseChain<T> {
+  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise)
   rejected?: RejectedFn
 }
 
@@ -53,7 +53,7 @@ export default class Axios {
 
     config = mergeConfig(this.defaults, config)
 
-    const chain: PromiseChain[] = [
+    const chain: PromiseChain<any>[] = [
       {
         resolved: dispatchRequest,
         rejected: undefined

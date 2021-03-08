@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-01 21:18:01
- * @LastEditTime: 2021-03-01 21:38:10
+ * @LastEditTime: 2021-03-09 00:56:57
  * @LastEditors: Please set LastEditors
  * @Description: 拦截器
  * @FilePath: /ts-axios/src/core/interceptorManager.ts
@@ -20,7 +20,7 @@ export default class InterceptorManager<T> {
     this.interceptors = []
   }
 
-  use(resolved: ResolvedFn<T>, rejected: ResolvedFn): number {
+  use(resolved: ResolvedFn<T>, rejected: RejectedFn): number {
     this.interceptors.push({
       resolved,
       rejected
