@@ -4,7 +4,7 @@ import { EOF } from 'dns'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:41:33
- * @LastEditTime: 2021-03-07 16:11:29
+ * @LastEditTime: 2021-03-15 22:59:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-axios/src/helpers/url.ts
@@ -49,4 +49,27 @@ export function buildURl(url: string, params?: any): string {
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
   }
   return url
+}
+
+interface URLOrigin {
+  protocol: string
+  host: string
+}
+
+export default function isURLSameOrigin(requestURL: string): boolean {
+  const parseOrigin = resolveURL(requestURL)
+  return parseOrigin.protocol === currentOrigin.protocol && parseOrigin.host === currentOrigin.host
+}
+
+const URLParsingNode = document.createElement('a')
+const currentOrigin = resolveURL(window.location.href)
+
+function resolveURL(url: string): URLOrigin {
+  URLParsingNode.setAttribute('href', url)
+  const { protocol, host } = URLParsingNode
+
+  return {
+    protocol,
+    host
+  }
 }

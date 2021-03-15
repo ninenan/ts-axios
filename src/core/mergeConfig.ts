@@ -1,7 +1,7 @@
 /*
  * @Author: NinNan
  * @Date: 2021-03-04 22:22:59
- * @LastEditTime: 2021-03-07 17:43:37
+ * @LastEditTime: 2021-03-15 22:18:39
  * @LastEditors: Please set LastEditors
  * @Description: mergeConfig
  * @FilePath: /ts-axios/src/core/mergeConfig.ts
@@ -26,6 +26,18 @@ function fromVal2Start(val1: any, val2: any): any {
   }
 }
 
+// function deepMergeStart(val1: any, val2: any): any {
+//   if (isPlainObject(val2)) {
+//     return deepMerge(val1, val2)
+//   } else if (typeof val2 !== 'undefined') {
+//     return val2
+//   } else if (isPlainObject(val1)) {
+//     return deepMerge(val1)
+//   } else if (typeof val1 !== 'undefined') {
+//     return val1
+//   }
+// }
+
 function deepMergeStart(val1: any, val2: any): any {
   if (isPlainObject(val2)) {
     return deepMerge(val1, val2)
@@ -33,7 +45,7 @@ function deepMergeStart(val1: any, val2: any): any {
     return val2
   } else if (isPlainObject(val1)) {
     return deepMerge(val1)
-  } else if (typeof val1 !== 'undefined') {
+  } else {
     return val1
   }
 }

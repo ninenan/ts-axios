@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:42:17
- * @LastEditTime: 2021-03-09 00:08:50
+ * @LastEditTime: 2021-03-15 22:06:29
  * @LastEditors: Please set LastEditors
  * @Description: dispatchRequest
  * @FilePath: /ts-axios/src/core/dispatchRequest.ts
@@ -16,9 +16,18 @@ import transform from './transform'
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   throwIfCancellationRequested(config)
   processConfig(config)
-  return xhr(config).then(res => {
-    return transformResponseData(res)
-  })
+  return xhr(config).then(
+    res => {
+      return transformResponseData(res)
+    }
+    // ,
+    // e => {
+    //   if (e && e.response) {
+    //     e.response = transformResponseData(e.response)
+    //   }
+    //   return Promise.reject(e)
+    // }
+  )
 }
 
 function processConfig(config: AxiosRequestConfig): void {

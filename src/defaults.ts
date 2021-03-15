@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-03 22:35:32
- * @LastEditTime: 2021-03-07 18:14:42
+ * @LastEditTime: 2021-03-15 22:49:09
  * @LastEditors: Please set LastEditors
  * @Description: 默认配置定义
  * @FilePath: /ts-axios/src/defaults.ts
@@ -18,6 +18,10 @@ const defaults: AxiosRequestConfig = {
       Accept: 'application/json, text/plain, */*'
     }
   },
+  xsrfCookieName: 'XSRF-TOKEN',
+
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
   transformRequest: [
     function(data: any, headers: any): any {
       processHeaders(headers, data)

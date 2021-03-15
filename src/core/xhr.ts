@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-03-09 00:55:56
+ * @LastEditTime: 2021-03-15 23:32:07
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/core/xhr.ts
@@ -9,10 +9,25 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import { parseHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
+import isURLSameOrigin from '../helpers/url'
+import cookie from '../helpers/cookie'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { data = null, method = 'get', url, headers, responseType, timeout, cancelToken } = config
+    const {
+      data = null,
+      method = 'get',
+      url,
+      headers,
+      responseType,
+      timeout,
+      cancelToken,
+      withCredentials,
+      xsrfCookieName,
+      xsrfHeaderName,
+      onDownloadProgress,
+      onUploadProgress
+    } = config
 
     const request = new XMLHttpRequest()
 
@@ -52,6 +67,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.timeout = timeout
     }
 
+    if (withCredentials) {
+      request.withCredentials = withCredentials
+    }
+
     /**
      * @description 请求超时
      */
@@ -61,6 +80,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       )
     }
 
+    if (onDownloadProgress) {
+      request.onprogress = onDownloadProgress
+    }
+
+    if (onUploadProgress) {
+      request.upload.onprogress = onUploadProgress
+    }
+
     // Object.entries(headers).forEach(([name, val]: any[]) => {
     //   if (data === null && name.toLowerCase() === 'content-type') {
     //     delete headers[name]
@@ -68,6 +95,13 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     //     request.setRequestHeader(name, val)
     //   }
     // })
+
+    if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
+      const xsrfValue = cookie.read(xsrfCookieName)
+      if (xsrfValue) {
+        headers[xsrfHeaderName!] = xsrfValue
+      }
+    }
 
     Object.keys(headers).forEach(name => {
       if (data === null && name.toLowerCase() === 'content-type') {

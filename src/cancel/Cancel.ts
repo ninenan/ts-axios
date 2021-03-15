@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-08 22:33:21
- * @LastEditTime: 2021-03-08 23:52:04
+ * @LastEditTime: 2021-03-15 21:33:36
  * @LastEditors: Please set LastEditors
  * @Description: Cancel
  * @FilePath: /ts-axios/src/cancel/Cancel.ts

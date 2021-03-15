@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-08 22:12:35
- * @LastEditTime: 2021-03-09 00:16:31
+ * @LastEditTime: 2021-03-15 21:50:33
  * @LastEditors: Please set LastEditors
  * @Description: CancelToken
  * @FilePath: /ts-axios/src/cancel/CancelToken.ts
