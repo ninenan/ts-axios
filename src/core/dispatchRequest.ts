@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:42:17
- * @LastEditTime: 2021-03-15 22:06:29
+ * @LastEditTime: 2021-03-16 23:07:42
  * @LastEditors: Please set LastEditors
  * @Description: dispatchRequest
  * @FilePath: /ts-axios/src/core/dispatchRequest.ts
@@ -19,14 +19,13 @@ export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromis
   return xhr(config).then(
     res => {
       return transformResponseData(res)
+    },
+    e => {
+      if (e && e.response) {
+        e.response = transformResponseData(e.response)
+      }
+      return Promise.reject(e)
     }
-    // ,
-    // e => {
-    //   if (e && e.response) {
-    //     e.response = transformResponseData(e.response)
-    //   }
-    //   return Promise.reject(e)
-    // }
   )
 }
 

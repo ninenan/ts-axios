@@ -1,10 +1,7 @@
-import { execFile } from 'child_process'
-import { EOF } from 'dns'
-
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:41:33
- * @LastEditTime: 2021-03-15 22:59:24
+ * @LastEditTime: 2021-03-16 23:19:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-axios/src/helpers/url.ts

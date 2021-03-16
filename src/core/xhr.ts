@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-03-16 21:18:21
+ * @LastEditTime: 2021-03-16 22:32:35
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/core/xhr.ts
@@ -27,12 +27,13 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfCookieName,
       xsrfHeaderName,
       onDownloadProgress,
-      onUploadProgress
+      onUploadProgress,
+      auth
     } = config
 
     const request = new XMLHttpRequest()
 
-    request.open(method.toUpperCase(), url!, true) // url后面加! 表示断言url不为空
+    request.open(method!.toUpperCase(), url!, true) // url后面加! 表示断言url不为空
 
     configureRequest()
 
@@ -61,6 +62,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     function addEvents(): void {
       request.onreadystatechange = function handleLoad() {
         if (request.readyState !== 4) {
+          return
+        }
+
+        if (request.status === 0) {
           return
         }
 
@@ -110,11 +115,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
       if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
         const xsrfValue = cookie.read(xsrfCookieName)
-        if (xsrfValue) {
+        if (xsrfValue && xsrfHeaderName) {
           headers[xsrfHeaderName!] = xsrfValue
         }
       }
 
+      if (auth) {
+        headers['Authorization'] = 'Basic' + btoa(auth.username + ':' + auth.password)
+      }
       // Object.entries(headers).forEach(([name, val]: any[]) => {
       //   if (data === null && name.toLowerCase() === 'content-type') {
       //     delete headers[name]

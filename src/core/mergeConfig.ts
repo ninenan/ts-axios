@@ -1,7 +1,7 @@
 /*
  * @Author: NinNan
  * @Date: 2021-03-04 22:22:59
- * @LastEditTime: 2021-03-15 22:18:39
+ * @LastEditTime: 2021-03-16 22:12:49
  * @LastEditors: Please set LastEditors
  * @Description: mergeConfig
  * @FilePath: /ts-axios/src/core/mergeConfig.ts
@@ -50,7 +50,7 @@ function deepMergeStart(val1: any, val2: any): any {
   }
 }
 
-const startKeysDeepMerge = ['headers']
+const startKeysDeepMerge = ['headers', 'auth']
 
 startKeysDeepMerge.forEach(key => {
   starts[key] = deepMergeStart
