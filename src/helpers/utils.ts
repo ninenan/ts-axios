@@ -3,7 +3,7 @@ import { type } from 'os'
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-03-07 19:44:26
+ * @LastEditTime: 2021-03-16 21:09:41
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -69,4 +69,8 @@ export const deepMerge = (...objs: any[]): any => {
   })
 
   return result
+}
+
+export function isFormData(val: any): boolean {
+  return typeof val !== 'undefined' && val instanceof FormData
 }
