@@ -1,9 +1,7 @@
-import { type } from 'os'
-
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-03-16 21:09:41
+ * @LastEditTime: 2021-03-17 22:22:34
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -73,4 +71,8 @@ export const deepMerge = (...objs: any[]): any => {
 
 export function isFormData(val: any): boolean {
   return typeof val !== 'undefined' && val instanceof FormData
+}
+
+export function isURLSearchParams(val: any): val is URLSearchParams {
+  return typeof val !== 'undefined' && val instanceof URLSearchParams
 }

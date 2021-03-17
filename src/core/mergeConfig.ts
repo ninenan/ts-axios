@@ -1,7 +1,7 @@
 /*
  * @Author: NinNan
  * @Date: 2021-03-04 22:22:59
- * @LastEditTime: 2021-03-16 22:12:49
+ * @LastEditTime: 2021-03-16 23:28:28
  * @LastEditors: Please set LastEditors
  * @Description: mergeConfig
  * @FilePath: /ts-axios/src/core/mergeConfig.ts

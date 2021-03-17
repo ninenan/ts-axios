@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-03-16 22:32:35
+ * @LastEditTime: 2021-03-17 22:06:50
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/core/xhr.ts
@@ -28,7 +28,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
-      auth
+      auth,
+      validateStatus
     } = config
 
     const request = new XMLHttpRequest()
@@ -121,7 +122,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       }
 
       if (auth) {
-        headers['Authorization'] = 'Basic' + btoa(auth.username + ':' + auth.password)
+        headers['Authorization'] = 'Basic ' + btoa(auth.username + ':' + auth.password)
       }
       // Object.entries(headers).forEach(([name, val]: any[]) => {
       //   if (data === null && name.toLowerCase() === 'content-type') {
@@ -150,7 +151,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function handleResponse(response: AxiosResponse): void {
-      if (response.status >= 200 && response.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
         reject(

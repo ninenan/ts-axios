@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-24 22:47:09
- * @LastEditTime: 2021-03-08 23:09:13
+ * @LastEditTime: 2021-03-17 23:02:09
  * @LastEditors: Please set LastEditors
  * @Description: axios配置
  * @FilePath: /ts-axios/src/axios.ts
@@ -32,4 +32,15 @@ axios.CancelToken = CancelToken
 axios.Cancel = Cancel
 axios.isCancel = isCancel
 
+axios.all = function all(promise) {
+  return Promise.all(promise)
+}
+
+axios.spread = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr)
+  }
+}
+
+axios.Axios = Axios
 export default axios

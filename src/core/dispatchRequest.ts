@@ -1,15 +1,14 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:42:17
- * @LastEditTime: 2021-03-16 23:07:42
+ * @LastEditTime: 2021-03-17 23:00:37
  * @LastEditors: Please set LastEditors
  * @Description: dispatchRequest
  * @FilePath: /ts-axios/src/core/dispatchRequest.ts
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import xhr from './xhr'
-import { buildURl } from '../helpers/url'
-// import { transformRequest, transformResponse } from '../helpers/data'
+import { buildURl, combineURL, isAbsoluteURL } from '../helpers/url'
 import { flattenHeaders, processHeaders } from '../helpers/headers'
 import transform from './transform'
 
@@ -31,24 +30,17 @@ export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromis
 
 function processConfig(config: AxiosRequestConfig): void {
   config.url = transformUrl(config)
-  // config.headers = transformHeaders(config)
   config.data = transform(config.data, config.headers, config.transformRequest)
   config.headers = flattenHeaders(config.headers, config.method!)
 }
 
-function transformUrl(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURl(url!, params) // url后面加! 表示断言url不为空
+export function transformUrl(config: AxiosRequestConfig): string {
+  let { url, params, paramsSerializer, baseURL } = config
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURL(baseURL, url)
+  }
+  return buildURl(url!, params, paramsSerializer) // url后面加! 表示断言url不为空
 }
-
-// function transformRequestData(config: AxiosRequestConfig): any {
-//   return transformRequest(config.data)
-// }
-
-// function transformHeaders(config: AxiosRequestConfig): any {
-//   const { headers = {}, data } = config
-//   return processHeaders(headers, data)
-// }
 
 function transformResponseData(res: AxiosResponse): AxiosResponse {
   // res.data = transformResponse(res.data)
