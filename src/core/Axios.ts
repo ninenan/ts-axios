@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-27 16:39:53
- * @LastEditTime: 2021-03-17 23:01:29
+ * @LastEditTime: 2021-03-23 22:17:45
  * @LastEditors: Please set LastEditors
  * @Description: Axios
  * @FilePath: /ts-axios/src/core/Axios.ts
@@ -95,15 +95,15 @@ export default class Axios {
     return this._requestMethodWithoutData('options', url, config)
   }
 
-  post(url: string, config: AxiosRequestConfig, data?: any): AxiosPromise {
+  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithData('post', url, data, config)
   }
 
-  put(url: string, config: AxiosRequestConfig, data?: any): AxiosPromise {
+  put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithData('put', url, data, config)
   }
 
-  patch(url: string, config: AxiosRequestConfig, data?: any): AxiosPromise {
+  patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithData('patch', url, data, config)
   }
 
