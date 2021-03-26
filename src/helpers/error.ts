@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-24 21:51:16
- * @LastEditTime: 2021-03-09 00:36:01
+ * @LastEditTime: 2021-03-26 13:40:18
  * @LastEditors: Please set LastEditors
  * @Description: axiosError
  * @FilePath: /ts-axios/src/helpers/error.ts

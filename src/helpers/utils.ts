@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 20:51:08
- * @LastEditTime: 2021-03-17 22:22:34
+ * @LastEditTime: 2021-03-26 11:10:20
  * @LastEditors: Please set LastEditors
  * @Description: utils
  * @FilePath: /ts-axios/src/helpers/utils.ts
@@ -69,7 +69,7 @@ export const deepMerge = (...objs: any[]): any => {
   return result
 }
 
-export function isFormData(val: any): boolean {
+export function isFormData(val: any): val is FormData {
   return typeof val !== 'undefined' && val instanceof FormData
 }
 
