@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-25 22:40:15
- * @LastEditTime: 2021-03-26 14:31:26
+ * @LastEditTime: 2021-03-26 14:47:30
  * @LastEditors: Please set LastEditors
  * @Description: util test
  * @FilePath: /ts-axios/test/helpers/util.spec.ts
@@ -50,9 +50,9 @@ describe('helpers/utils', () => {
       expect(isPlainObject(undefined)).toBeFalsy()
     })
 
-    // test('should validate FormData', () => {
-    //   expect(isFormData(new FormData())).toBeTruthy()
-    // })
+    test('should validate FormData', () => {
+      expect(isFormData(new FormData())).toBeTruthy()
+    })
 
     test('should validate URLSearchParams', () => {
       expect(isURLSearchParams(new URLSearchParams())).toBeTruthy()
