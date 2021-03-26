@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-25 22:40:15
- * @LastEditTime: 2021-03-26 13:42:10
+ * @LastEditTime: 2021-03-26 14:31:26
  * @LastEditors: Please set LastEditors
  * @Description: util test
  * @FilePath: /ts-axios/test/helpers/util.spec.ts
@@ -94,11 +94,78 @@ describe('helpers/utils', () => {
       const objC: any = {
         bar: 456
       }
+
       deepMerge(objA, objB, objC)
+
       expect(typeof objA.foo).toBe('undefined')
       expect(typeof objA.bar).toBe('undefined')
       expect(typeof objB.bar).toBe('undefined')
       expect(typeof objC.foo).toBe('undefined')
+    })
+
+    test('should deepMerge properties', () => {
+      const objA = {
+        foo: '000'
+      }
+      const objB: any = {
+        foo: 123
+      }
+      const objC: any = {
+        bar: 456
+      }
+      const objD: any = deepMerge(objA, objB, objC)
+
+      expect(objD.foo).toBe(123)
+      expect(objD.bar).toBe(456)
+    })
+
+    test('should deepMerge recursively', () => {
+      const objA = {
+        foo: {
+          bar: 123
+        }
+      }
+      const objB = {
+        foo: {
+          baz: 456
+        },
+        bar: 789
+      }
+      const objC = deepMerge(objA, objB)
+
+      expect(objC).toEqual({
+        foo: {
+          bar: 123,
+          baz: 456
+        },
+        bar: 789
+      })
+    })
+
+    test('should remove all references from nested objects', () => {
+      const objA = {
+        foo: {
+          bar: 123
+        }
+      }
+      const objB = {}
+      const objC = deepMerge(objA, objB)
+
+      expect(objC).toEqual({
+        foo: {
+          bar: 123
+        }
+      })
+      expect(objC.foo).not.toBe(objA.foo)
+    })
+
+    test('should handle null and undefined arguments', () => {
+      expect(deepMerge(undefined, undefined)).toEqual({})
+      expect(deepMerge(undefined, { foo: 123 })).toEqual({ foo: 123 })
+      expect(deepMerge({ foo: 123 }, undefined)).toEqual({ foo: 123 })
+      expect(deepMerge(null, null)).toEqual({})
+      expect(deepMerge(null, { foo: 123 })).toEqual({ foo: 123 })
+      expect(deepMerge({ foo: 123 }, null)).toEqual({ foo: 123 })
     })
   })
 })
