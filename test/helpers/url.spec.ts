@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-28 16:27:47
- * @LastEditTime: 2021-03-28 17:52:35
+ * @LastEditTime: 2021-03-28 18:12:24
  * @LastEditors: Please set LastEditors
  * @Description: url test
  * @FilePath: /ts-axios/test/helpers/url.spec.ts
@@ -93,6 +93,10 @@ describe('helpers:url', () => {
       expect(serializer).toHaveBeenCalled()
       expect(serializer).toHaveBeenCalledWith(params)
     })
+  })
+
+  test('should support URLSearchParams', () => {
+    expect(buildURl('/foo', new URLSearchParams('bar=baz'))).toBe('/foo?bar=baz')
   })
 
   describe('isAbsoluteURL', () => {
