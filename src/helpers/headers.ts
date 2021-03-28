@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-21 23:00:30
- * @LastEditTime: 2021-03-16 23:18:10
+ * @LastEditTime: 2021-03-28 16:27:28
  * @LastEditors: Please set LastEditors
  * @Description: headers
  * @FilePath: /ts-axios/src/helpers/headers.ts
@@ -45,9 +45,6 @@ export function parseHeaders(headers: string): any {
     if (!key) {
       return
     }
-    // if (val) {
-    //   val = val.trim()
-    // }
     const val = vals.join(':').trim()
     parsed[key] = val
   })
