@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-28 15:38:59
- * @LastEditTime: 2021-03-28 16:24:04
+ * @LastEditTime: 2021-03-29 16:49:00
  * @LastEditors: Please set LastEditors
  * @Description: headers test
  * @FilePath: /ts-axios/test/helpers/header.spec.ts

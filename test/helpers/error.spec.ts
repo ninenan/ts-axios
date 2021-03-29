@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-28 15:14:59
- * @LastEditTime: 2021-03-28 15:29:23
+ * @LastEditTime: 2021-03-29 16:49:12
  * @LastEditors: Please set LastEditors
  * @Description: test error
  * @FilePath: /ts-axios/test/helpers/error.spec.ts
