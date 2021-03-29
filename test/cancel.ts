@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-29 17:43:44
- * @LastEditTime: 2021-03-29 18:09:50
+ * @LastEditTime: 2021-03-29 23:16:41
  * @LastEditors: Please set LastEditors
  * @Description: Cancel test
  * @FilePath: \ts-axios\test\cancel.spec.ts
