@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-29 17:43:44
- * @LastEditTime: 2021-03-29 23:16:41
+ * @LastEditTime: 2021-03-30 17:38:43
  * @LastEditors: Please set LastEditors
  * @Description: Cancel test
  * @FilePath: \ts-axios\test\cancel.spec.ts
@@ -22,7 +22,7 @@ describe('cancel', () => {
   })
 
   describe('when called before sending request', () => {
-    test('should rejects Promise width a Cancel object', () => {
+    test('should rejects Promise with a Cancel object', () => {
       const source = CancelToken.source()
       source.cancel('Operation has been canceled')
 
@@ -46,7 +46,7 @@ describe('cancel', () => {
           cancelToken: source.token
         })
         .catch(reason => {
-          expect(reason).toEqual(expect.any(CancelToken))
+          expect(reason).toEqual(expect.any(Cancel))
           expect(reason.message).toBe('Operation has been canceled.')
           done()
         })
@@ -95,9 +95,7 @@ describe('cancel', () => {
             done.fail('Unhandled rejection')
           })
           source.cancel()
-          setTimeout(() => {
-            done
-          }, 100)
+          setTimeout(done, 100)
         })
 
       getAjaxRequest().then(request => {

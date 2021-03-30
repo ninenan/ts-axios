@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-29 22:08:53
- * @LastEditTime: 2021-03-29 23:18:26
+ * @LastEditTime: 2021-03-30 17:31:25
  * @LastEditors: Please set LastEditors
  * @Description: requests test
  * @FilePath: /ts-axios/test/requests.spec.ts
@@ -54,14 +54,14 @@ describe('requests', () => {
 
     jasmine.Ajax.uninstall()
 
-    axios('/foo')
+    return axios('/foo')
       .then(resolveSpy)
       .catch(rejectSpy)
       .then(next)
 
     function next(reason: AxiosResponse | AxiosError) {
       expect(resolveSpy).not.toHaveBeenCalled()
-      expect(resolveSpy).toHaveBeenCalled()
+      expect(rejectSpy).toHaveBeenCalled()
       expect(reason instanceof Error).toBeTruthy()
       expect((reason as AxiosError).message).toBe('Network Error')
       expect(reason.request).toEqual(expect.any(XMLHttpRequest))
@@ -89,6 +89,7 @@ describe('requests', () => {
       setTimeout(() => {
         expect(err instanceof Error).toBeTruthy()
         expect(err.message).toBe('Timeout of 2000 ms exceeded')
+        done()
       }, 100)
     })
   })
@@ -111,7 +112,13 @@ describe('requests', () => {
       .catch(rejectSpy)
       .then(next)
 
-    function next(reason: AxiosResponse | AxiosError) {
+    return getAjaxRequest().then(request => {
+      request.respondWith({
+        status: 500
+      })
+    })
+
+    function next(reason: AxiosError | AxiosResponse) {
       expect(resolveSpy).not.toHaveBeenCalled()
       expect(rejectSpy).toHaveBeenCalled()
       expect(reason instanceof Error).toBeTruthy()
@@ -139,6 +146,12 @@ describe('requests', () => {
       .then(resolveSpy)
       .catch(rejectSpy)
       .then(next)
+
+    return getAjaxRequest().then(request => {
+      request.respondWith({
+        status: 500
+      })
+    })
 
     function next(res: AxiosResponse | AxiosError) {
       expect(resolveSpy).toHaveBeenCalled()
