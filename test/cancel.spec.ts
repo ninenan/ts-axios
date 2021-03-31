@@ -1,9 +1,9 @@
 /*
  * @Author: NineNan
  * @Date: 2021-03-29 17:43:44
- * @LastEditTime: 2021-03-30 17:38:43
+ * @LastEditTime: 2021-03-31 14:03:41
  * @LastEditors: Please set LastEditors
- * @Description: Cancel test
+ * @Description: Cancel test test
  * @FilePath: \ts-axios\test\cancel.spec.ts
  */
 import axios from '../src/index'
