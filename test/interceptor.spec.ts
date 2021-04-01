@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: NineNan
  * @Date: 2021-03-31 14:08:00
- * @LastEditTime: 2021-04-01 13:31:28
+ * @LastEditTime: 2021-04-01 14:45:23
  * @LastEditors: Please set LastEditors
  * @Description: interceptor test
  * @FilePath: \ts-axios\test\interceptor.spec.ts
@@ -143,5 +143,110 @@ describe('interceptor', () => {
       expect(response.status).toEqual(500)
       done()
     }, 100)
+  })
+
+  test('should add a response interceptor that returns a promise', done => {
+    let response: AxiosResponse
+    const instance = axios.create()
+
+    instance.interceptors.response.use(data => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          data.data = 'you have been promised!'
+          resolve(data)
+        }, 10)
+      })
+    })
+
+    instance('/foo').then(res => {
+      response = res
+    })
+
+    getAjaxRequest().then(request => {
+      request.respondWith({
+        status: 200,
+        responseText: 'OK'
+      })
+      setTimeout(() => {
+        expect(response.data).toBe('you have been promised!')
+        done()
+      }, 100)
+    })
+  })
+
+  test('should add multiple response interceptors', done => {
+    let response: AxiosResponse
+    const instance = axios.create()
+
+    instance.interceptors.response.use(data => {
+      data.data = data.data + '1'
+      return data
+    })
+
+    instance.interceptors.response.use(data => {
+      data.data = data.data + '2'
+      return data
+    })
+
+    instance.interceptors.response.use(data => {
+      data.data = data.data + '3'
+      return data
+    })
+
+    instance('/foo').then(data => {
+      response = data
+    })
+
+    getAjaxRequest().then(request => {
+      request.respondWith({
+        status: 200,
+        responseText: 'OK'
+      })
+
+      setTimeout(() => {
+        expect(response.data).toBe('OK123')
+        done()
+      }, 100)
+    })
+  })
+
+  test('should allow removing interceptors', done => {
+    let response: AxiosResponse
+    let intercept
+    const instance = axios.create()
+
+    instance.interceptors.response.use(data => {
+      data.data = data.data + '1'
+      return data
+    })
+
+    intercept = instance.interceptors.response.use(data => {
+      data.data = data.data + '2'
+      return data
+    })
+
+    instance.interceptors.response.use(data => {
+      data.data = data.data + '3'
+      return data
+    })
+
+    instance.interceptors.response.eject(intercept)
+    instance.interceptors.response.eject(5)
+
+    instance('/foo').then(data => {
+      response = data
+    })
+
+    getAjaxRequest().then(request => {
+      request.respondWith({
+        status: 200,
+        responseText: 'OK'
+      })
+
+      setTimeout(() => {
+        expect(response.data).toBe('OK13')
+        done()
+      }, 100)
+    })
   })
 })
