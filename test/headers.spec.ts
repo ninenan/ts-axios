@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: NineNan
  * @Date: 2021-04-14 00:24:01
- * @LastEditTime: 2021-04-14 00:48:48
+ * @LastEditTime: 2021-04-15 21:37:11
  * @LastEditors: Please set LastEditors
  * @Description: headers test
  * @FilePath: \ts-axios\test\headers.spec.ts
@@ -80,5 +80,22 @@ describe('headers', () => {
     })
   })
 
-  // it('should preserve')
+  it('should preserve content-type if data is false', () => {
+    axios.post('/foo', false)
+
+    return getAjaxRequest().then(request => {
+      testHeaderValue(request.requestHeaders, 'Content-Type', 'application/x-www-form-urlencoded')
+    })
+  })
+
+  test('should remove content-type if data is FormData', () => {
+    const data = new FormData()
+    data.append('foo', 'bar')
+
+    axios.post('/foo', data)
+
+    return getAjaxRequest().then(request => {
+      testHeaderValue(request.requestHeaders, 'Content-Type', undefined)
+    })
+  })
 })
