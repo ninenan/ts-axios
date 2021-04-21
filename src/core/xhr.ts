@@ -1,7 +1,7 @@
 /*
  * @Author: NineNan
  * @Date: 2021-02-20 22:22:21
- * @LastEditTime: 2021-03-17 22:06:50
+ * @LastEditTime: 2021-04-21 21:38:01
  * @LastEditors: Please set LastEditors
  * @Description: xhr
  * @FilePath: /ts-axios/src/core/xhr.ts
@@ -143,10 +143,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     function processCancel(): void {
       if (cancelToken) {
-        cancelToken.promise.then(reason => {
-          request.abort()
-          reject(reason)
-        })
+        cancelToken.promise
+          .then(reason => {
+            request.abort()
+            reject(reason)
+          })
+          .catch(
+            /* istanbul ignore next */
+            () => {
+              // do nothing
+            }
+          )
       }
     }
 
